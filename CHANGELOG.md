@@ -1,3 +1,7 @@
+## 1.0.0
+
+* The default value that can be obtained from ValueManager has been changed to null.
+
 ## 0.0.1
 
 * Initial release.

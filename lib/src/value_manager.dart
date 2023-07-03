@@ -8,7 +8,7 @@
 class ValueManager {
   String get className => 'ValueManager';
 
-  String get version => '1';
+  String get version => '2';
   final Map<String, double?> _map = {};
   static const String _saveKey = 'map';
 
@@ -59,7 +59,7 @@ class ValueManager {
   /// * [initialValue] : Initial value. Applies only when first created.
   /// * [isAlwaysInitialize] : If true, always set initialValue.
   double? getValue(String name,
-      {double? initialValue = 0, bool isAlwaysInitialize = false}) {
+      {double? initialValue, bool isAlwaysInitialize = false}) {
     if (_map.containsKey(name)) {
       if (isAlwaysInitialize) {
         _map[name] = initialValue;
