@@ -10,13 +10,35 @@ import 'package:flutter/material.dart';
 class TextFieldManager {
   String get className => 'TextFieldManager';
 
-  String get version => '4';
+  String get version => '5';
   final Map<String, TextEditingController> _ctrlMap = {};
   final Map<String, FocusNode> _focusMap = {};
   static const String _saveKey = 'text_map';
 
   /// Constructor
   TextFieldManager();
+
+  /// (en)Restore this object from the dictionary.
+  /// If data with the same key already exists, it will be overwritten.
+  ///
+  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
+  /// * [src] : A dictionary made with toDict of this class.
+  TextFieldManager.fromDict(Map<String, dynamic> src) {
+    for (var i in src[_saveKey].keys) {
+      getCtrl(i as String,
+          initialText: src[_saveKey][i] as String, isAlwaysInitialize: true);
+      getFocus(i);
+    }
+  }
+
+  /// (en)Returns new manager that copied the contents of this manager.
+  /// However, note that focus is not copied.
+  ///
+  /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
+  /// ただし、フォーカスはコピーされないことに注意してください。
+  TextFieldManager copy() {
+    return TextFieldManager.fromDict(toDict());
+  }
 
   /// (en)Convert the object to a dictionary.
   /// Be careful how you handle user data.
@@ -42,19 +64,6 @@ class TextFieldManager {
     }
     d[_saveKey] = textMap;
     return d;
-  }
-
-  /// (en)Restore this object from the dictionary.
-  /// If data with the same key already exists, it will be overwritten.
-  ///
-  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
-  /// * [src] : A dictionary made with toDict of this class.
-  void fromDict(Map<String, dynamic> src) {
-    for (var i in src[_saveKey].keys) {
-      getCtrl(i as String,
-          initialText: src[_saveKey][i] as String, isAlwaysInitialize: true);
-      getFocus(i);
-    }
   }
 
   /// (en)Dispose all managed objects.

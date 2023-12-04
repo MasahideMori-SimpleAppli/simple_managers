@@ -8,12 +8,34 @@
 class MultiFlagManager {
   String get className => 'MultiFlagManager';
 
-  String get version => '1';
+  String get version => '2';
   final Map<String, List<bool>> _map = {};
   static const String _saveKey = 'map';
 
   /// Constructor
   MultiFlagManager();
+
+  /// (en)Restore this object from the dictionary.
+  /// If data with the same key already exists, it will be overwritten.
+  ///
+  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
+  /// * [src] : A dictionary made with toDict of this class.
+  MultiFlagManager.fromDict(Map<String, dynamic> src) {
+    for (String i in src[_saveKey].keys) {
+      List<bool> flags = [];
+      for (bool j in src[_saveKey][i]) {
+        flags.add(j);
+      }
+      setFlags(i, flags);
+    }
+  }
+
+  /// (en)Returns new manager that copied the contents of this manager.
+  ///
+  /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
+  MultiFlagManager copy() {
+    return MultiFlagManager.fromDict(toDict());
+  }
 
   /// (en)Convert the object to a dictionary.
   ///
@@ -37,21 +59,6 @@ class MultiFlagManager {
     }
     d[_saveKey] = mMap;
     return d;
-  }
-
-  /// (en)Restore this object from the dictionary.
-  /// If data with the same key already exists, it will be overwritten.
-  ///
-  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
-  /// * [src] : A dictionary made with toDict of this class.
-  void fromDict(Map<String, dynamic> src) {
-    for (String i in src[_saveKey].keys) {
-      List<bool> flags = [];
-      for (bool j in src[_saveKey][i]) {
-        flags.add(j);
-      }
-      setFlags(i, flags);
-    }
   }
 
   /// (en)Returns an flag with the specified name if it has been generated,

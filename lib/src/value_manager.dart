@@ -8,12 +8,30 @@
 class ValueManager {
   String get className => 'ValueManager';
 
-  String get version => '2';
+  String get version => '3';
   final Map<String, double?> _map = {};
   static const String _saveKey = 'map';
 
   /// Constructor
   ValueManager();
+
+  /// (en)Restore this object from the dictionary.
+  /// If data with the same key already exists, it will be overwritten.
+  ///
+  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
+  /// * [src] : A dictionary made with toDict of this class.
+  ValueManager.fromDict(Map<String, dynamic> src) {
+    for (String i in src[_saveKey].keys) {
+      setValue(i, src[_saveKey][i] as double?);
+    }
+  }
+
+  /// (en)Returns new manager that copied the contents of this manager.
+  ///
+  /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
+  ValueManager copy() {
+    return ValueManager.fromDict(toDict());
+  }
 
   /// (en)Convert the object to a dictionary.
   ///
@@ -37,17 +55,6 @@ class ValueManager {
     }
     d[_saveKey] = mMap;
     return d;
-  }
-
-  /// (en)Restore this object from the dictionary.
-  /// If data with the same key already exists, it will be overwritten.
-  ///
-  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
-  /// * [src] : A dictionary made with toDict of this class.
-  void fromDict(Map<String, dynamic> src) {
-    for (String i in src[_saveKey].keys) {
-      setValue(i, src[_saveKey][i] as double?);
-    }
   }
 
   /// (en)Returns an value with the specified name if it has been generated,

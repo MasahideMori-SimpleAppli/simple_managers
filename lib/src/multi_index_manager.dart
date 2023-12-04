@@ -8,12 +8,34 @@
 class MultiIndexManager {
   String get className => 'MultiIndexManager';
 
-  String get version => '1';
+  String get version => '2';
   final Map<String, Set<int>> _map = {};
   static const String _saveKey = 'map';
 
   /// Constructor
   MultiIndexManager();
+
+  /// (en)Restore this object from the dictionary.
+  /// If data with the same key already exists, it will be overwritten.
+  ///
+  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
+  /// * [src] : A dictionary made with toDict of this class.
+  MultiIndexManager.fromDict(Map<String, dynamic> src) {
+    for (String i in src[_saveKey].keys) {
+      Set<int> values = {};
+      for (int j in src[_saveKey][i]) {
+        values.add(j);
+      }
+      setIndexSet(i, values);
+    }
+  }
+
+  /// (en)Returns new manager that copied the contents of this manager.
+  ///
+  /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
+  MultiIndexManager copy() {
+    return MultiIndexManager.fromDict(toDict());
+  }
 
   /// (en)Convert the object to a dictionary.
   ///
@@ -37,21 +59,6 @@ class MultiIndexManager {
     }
     d[_saveKey] = mMap;
     return d;
-  }
-
-  /// (en)Restore this object from the dictionary.
-  /// If data with the same key already exists, it will be overwritten.
-  ///
-  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
-  /// * [src] : A dictionary made with toDict of this class.
-  void fromDict(Map<String, dynamic> src) {
-    for (String i in src[_saveKey].keys) {
-      Set<int> values = {};
-      for (int j in src[_saveKey][i]) {
-        values.add(j);
-      }
-      setIndexSet(i, values);
-    }
   }
 
   /// (en)Returns an index with the specified name if it has been generated,

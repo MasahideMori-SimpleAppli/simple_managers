@@ -1,3 +1,8 @@
+## 2.0.0
+
+* The fromDict method has been changed to a named constructor.
+* Added copy method.
+
 ## 1.0.0
 
 * The default value that can be obtained from ValueManager has been changed to null.

@@ -8,12 +8,31 @@
 class IndexManager {
   String get className => 'IndexManager';
 
-  String get version => '3';
+  String get version => '4';
   final Map<String, int?> _map = {};
   static const String _saveKey = 'index_map';
 
   /// Constructor
   IndexManager();
+
+  /// (en)Restore this object from the dictionary.
+  /// If data with the same key already exists, it will be overwritten.
+  ///
+  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
+  /// * [src] : A dictionary made with toDict of this class.
+  IndexManager.fromDict(Map<String, dynamic> src) {
+    for (String i in src[_saveKey].keys) {
+      getIndex(i,
+          initialValue: src[_saveKey][i] as int?, isAlwaysInitialize: true);
+    }
+  }
+
+  /// (en)Returns new manager that copied the contents of this manager.
+  ///
+  /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
+  IndexManager copy() {
+    return IndexManager.fromDict(toDict());
+  }
 
   /// (en)Convert the object to a dictionary.
   ///
@@ -37,18 +56,6 @@ class IndexManager {
     }
     d[_saveKey] = mMap;
     return d;
-  }
-
-  /// (en)Restore this object from the dictionary.
-  /// If data with the same key already exists, it will be overwritten.
-  ///
-  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
-  /// * [src] : A dictionary made with toDict of this class.
-  void fromDict(Map<String, dynamic> src) {
-    for (String i in src[_saveKey].keys) {
-      getIndex(i,
-          initialValue: src[_saveKey][i] as int?, isAlwaysInitialize: true);
-    }
   }
 
   /// (en)Returns an index with the specified name if it has been generated,

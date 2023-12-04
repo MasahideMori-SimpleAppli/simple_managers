@@ -8,12 +8,30 @@
 class FlagManager {
   String get className => 'FlagManager';
 
-  String get version => '1';
+  String get version => '2';
   final Map<String, bool> _map = {};
   static const String _saveKey = 'map';
 
   /// Constructor
   FlagManager();
+
+  /// (en)Restore this object from the dictionary.
+  /// If data with the same key already exists, it will be overwritten.
+  ///
+  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
+  /// * [src] : A dictionary made with toDict of this class.
+  FlagManager.fromDict(Map<String, dynamic> src) {
+    for (String i in src[_saveKey].keys) {
+      setFlag(i, src[_saveKey][i] as bool);
+    }
+  }
+
+  /// (en)Returns new manager that copied the contents of this manager.
+  ///
+  /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
+  FlagManager copy() {
+    return FlagManager.fromDict(toDict());
+  }
 
   /// (en)Convert the object to a dictionary.
   ///
@@ -37,17 +55,6 @@ class FlagManager {
     }
     d[_saveKey] = mMap;
     return d;
-  }
-
-  /// (en)Restore this object from the dictionary.
-  /// If data with the same key already exists, it will be overwritten.
-  ///
-  /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
-  /// * [src] : A dictionary made with toDict of this class.
-  void fromDict(Map<String, dynamic> src) {
-    for (String i in src[_saveKey].keys) {
-      setFlag(i, src[_saveKey][i] as bool);
-    }
   }
 
   /// (en)Returns an flag with the specified name if it has been generated,
