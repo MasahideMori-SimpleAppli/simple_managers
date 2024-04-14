@@ -10,10 +10,11 @@ import 'package:flutter/material.dart';
 class TextFieldManager {
   String get className => 'TextFieldManager';
 
-  String get version => '5';
+  String get version => '6';
   final Map<String, TextEditingController> _ctrlMap = {};
   final Map<String, FocusNode> _focusMap = {};
-  static const String _saveKey = 'text_map';
+  static const String _oldSaveKey = 'text_map';
+  static const String _saveKey = 'map';
 
   /// Constructor
   TextFieldManager();
@@ -24,10 +25,19 @@ class TextFieldManager {
   /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
   /// * [src] : A dictionary made with toDict of this class.
   TextFieldManager.fromDict(Map<String, dynamic> src) {
-    for (var i in src[_saveKey].keys) {
-      getCtrl(i as String,
-          initialText: src[_saveKey][i] as String, isAlwaysInitialize: true);
-      getFocus(i);
+    if (src.containsKey(_oldSaveKey)) {
+      for (var i in src[_oldSaveKey].keys) {
+        getCtrl(i as String,
+            initialText: src[_oldSaveKey][i] as String,
+            isAlwaysInitialize: true);
+        getFocus(i);
+      }
+    } else {
+      for (var i in src[_saveKey].keys) {
+        getCtrl(i as String,
+            initialText: src[_saveKey][i] as String, isAlwaysInitialize: true);
+        getFocus(i);
+      }
     }
   }
 
@@ -104,6 +114,27 @@ class TextFieldManager {
       _ctrlMap[name] = r;
       return r;
     }
+  }
+
+  /// (en) Sets the text in the target controller.
+  ///
+  /// (ja) 指定名のコントローラーにテキストをセットします。
+  ///
+  /// * [name] : The target controller name.
+  /// * [text] : The text you want to set.
+  void setText(String name, String text) {
+    final TextEditingController target = getCtrl(name);
+    target.text = text;
+  }
+
+  /// (en) Gets the text from the controller with the specified name.
+  ///
+  /// (ja) 指定名のコントローラーからテキストを取得します。
+  ///
+  /// * [name] : The target controller name.
+  String getText(String name) {
+    final TextEditingController target = getCtrl(name);
+    return target.text;
   }
 
   /// (en)If the FocusNode with the specified name has been created,

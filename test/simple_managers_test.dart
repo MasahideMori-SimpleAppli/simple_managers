@@ -37,9 +37,9 @@ void main() {
       expect(im.getIndex("second") == 2, true);
       Map<String, dynamic> m = im.toDict(nonSaveKeys: ["second"]);
       im = IndexManager.fromDict(m);
-      expect((m["index_map"] as Map).containsKey("first"), true);
-      expect(!(m["index_map"] as Map).containsKey("second"), true);
-      expect((m["index_map"] as Map)["first"] == null, true);
+      expect((m["map"] as Map).containsKey("first"), true);
+      expect(!(m["map"] as Map).containsKey("second"), true);
+      expect((m["map"] as Map)["first"] == null, true);
 
       // jsonEncode and jsonDecode
       String t = jsonEncode(im.toDict());
@@ -104,8 +104,8 @@ void main() {
       tfm.getCtrl("first").text = "first";
       tfm = TextFieldManager.fromDict(map);
       expect(tfm.getCtrl("first").text == "1", true);
-      expect((map["text_map"] as Map).containsKey("first"), true);
-      expect(!(map["text_map"] as Map).containsKey("second"), true);
+      expect((map["map"] as Map).containsKey("first"), true);
+      expect(!(map["map"] as Map).containsKey("second"), true);
       // function check
       tfm.getCtrl("first", initialText: "", isAlwaysInitialize: true);
       expect(tfm.containsEmptyCtrl(), true);
@@ -133,6 +133,27 @@ void main() {
       Map<String, double?> decoded = imDecoded.getMap();
       expect(decoded["first"] == null, true);
       expect(decoded["third"] == 3, true);
+    });
+  });
+
+  group('StateManager test', () {
+    test('toDict and fromDict test', () {
+      // normal test
+      StateManager sm = StateManager();
+      sm.fm.setFlag("a", true);
+      sm.im.setIndex("a", 1);
+      sm.mfm.setFlags("a", [true]);
+      sm.mim.setIndexSet("a", {1});
+      sm.tfm.setText("a", "b");
+      sm.vm.setValue("a", 1.0);
+      Map<String, dynamic> mp = sm.toDict();
+      sm = StateManager.fromDict(mp);
+      expect(sm.fm.getFlag("a") == true, true);
+      expect(sm.im.getIndex("a") == 1, true);
+      expect(sm.mfm.getFlags("a").first == true, true);
+      expect(sm.mim.getIndexSet("a").first == 1, true);
+      expect(sm.tfm.getText("a") == "b", true);
+      expect(sm.vm.getValue("a") == 1.0, true);
     });
   });
 }

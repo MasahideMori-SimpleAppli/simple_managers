@@ -8,9 +8,10 @@
 class IndexManager {
   String get className => 'IndexManager';
 
-  String get version => '4';
+  String get version => '5';
   final Map<String, int?> _map = {};
-  static const String _saveKey = 'index_map';
+  static const String _oldSaveKey = 'index_map';
+  static const String _saveKey = 'map';
 
   /// Constructor
   IndexManager();
@@ -21,9 +22,17 @@ class IndexManager {
   /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
   /// * [src] : A dictionary made with toDict of this class.
   IndexManager.fromDict(Map<String, dynamic> src) {
-    for (String i in src[_saveKey].keys) {
-      getIndex(i,
-          initialValue: src[_saveKey][i] as int?, isAlwaysInitialize: true);
+    if (src.containsKey(_oldSaveKey)) {
+      for (String i in src[_oldSaveKey].keys) {
+        getIndex(i,
+            initialValue: src[_oldSaveKey][i] as int?,
+            isAlwaysInitialize: true);
+      }
+    } else {
+      for (String i in src[_saveKey].keys) {
+        getIndex(i,
+            initialValue: src[_saveKey][i] as int?, isAlwaysInitialize: true);
+      }
     }
   }
 
