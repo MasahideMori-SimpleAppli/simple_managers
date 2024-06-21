@@ -9,6 +9,8 @@ It currently contains the following manager classes
 * MultiIndexManager: Manager for multi index set such as segmented button.
 * TextFieldManager: Text-editing controller and focus manager.
 * ValueManager: Manager of a single floating point number.
+* StateManager: A manager class that has all the manager classes inside it. This is especially useful when using [SpWML](https://pub.dev/packages/simple_block_markup_language).
+* SingletonStateManager: A singleton class wrapping the StateManager that allows you to easily save and restore the state of your entire app, as long as you don't use duplicate keys anywhere in your app.
 
 ## Usage
 This package contains several manager classes, but I will explain the text field manager, which has a slightly special usage.

@@ -1,3 +1,7 @@
+## 3.1.0
+
+* Added SingletonStateManager class.
+
 ## 3.0.0
 
 * Added StateManager class. This class is a manager class that includes all the manager classes in this package and is easy to use.
