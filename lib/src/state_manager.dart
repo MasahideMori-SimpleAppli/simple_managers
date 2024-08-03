@@ -1,3 +1,5 @@
+import 'package:file_state_manager/file_state_manager.dart';
+
 import '../simple_managers.dart';
 
 ///
@@ -7,9 +9,9 @@ import '../simple_managers.dart';
 ///
 /// First edition creation date 2024-04-14 13:28:35
 ///
-class StateManager {
-  String get className => 'StateManager';
-  String get version => '1';
+class StateManager extends CloneableFile {
+  static const className = 'StateManager';
+  static const version = '2';
   static const String _saveKey = "map";
 
   FlagManager fm = FlagManager();
@@ -50,7 +52,8 @@ class StateManager {
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
   /// ただし、テキストフィールドのフォーカスはコピーされないことに注意してください。
-  StateManager copy() {
+  @override
+  StateManager clone() {
     return StateManager.fromDict(toDict());
   }
 
@@ -60,6 +63,7 @@ class StateManager {
   ///
   /// * [nonSaveKeys] : If you specify a key that you don't want saved,
   /// that key and its contents will not be converted to a dictionary.
+  @override
   Map<String, dynamic> toDict({List<String>? nonSaveKeys}) {
     Map<String, dynamic> d = {};
     d['class_name'] = className;

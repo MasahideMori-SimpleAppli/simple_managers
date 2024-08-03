@@ -1,3 +1,4 @@
+import 'package:file_state_manager/file_state_manager.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -7,10 +8,9 @@ import 'package:flutter/material.dart';
 ///
 /// First edition creation date 2022-11-05 23:49:27
 ///
-class TextFieldManager {
-  String get className => 'TextFieldManager';
-
-  String get version => '6';
+class TextFieldManager extends CloneableFile {
+  static const String className = 'TextFieldManager';
+  static const String version = '7';
   final Map<String, TextEditingController> _ctrlMap = {};
   final Map<String, FocusNode> _focusMap = {};
   static const String _oldSaveKey = 'text_map';
@@ -46,7 +46,8 @@ class TextFieldManager {
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
   /// ただし、フォーカスはコピーされないことに注意してください。
-  TextFieldManager copy() {
+  @override
+  TextFieldManager clone() {
     return TextFieldManager.fromDict(toDict());
   }
 
@@ -58,6 +59,7 @@ class TextFieldManager {
   ///
   /// * [nonSaveKeys] : If you specify a key that you don't want saved,
   /// that key and its contents will not be converted to a dictionary.
+  @override
   Map<String, dynamic> toDict({List<String>? nonSaveKeys}) {
     Map<String, dynamic> d = {};
     d['class_name'] = className;

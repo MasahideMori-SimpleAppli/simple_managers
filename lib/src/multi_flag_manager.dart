@@ -1,3 +1,5 @@
+import 'package:file_state_manager/file_state_manager.dart';
+
 ///
 /// This package manages multiple flag lists identified by name and supports serialization and deserialization.
 ///
@@ -5,10 +7,9 @@
 ///
 /// First edition creation date 2023-06-19 20:33:27
 ///
-class MultiFlagManager {
-  String get className => 'MultiFlagManager';
-
-  String get version => '2';
+class MultiFlagManager extends CloneableFile {
+  static const String className = 'MultiFlagManager';
+  static const String version = '3';
   final Map<String, List<bool>> _map = {};
   static const String _saveKey = 'map';
 
@@ -33,7 +34,8 @@ class MultiFlagManager {
   /// (en)Returns new manager that copied the contents of this manager.
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
-  MultiFlagManager copy() {
+  @override
+  MultiFlagManager clone() {
     return MultiFlagManager.fromDict(toDict());
   }
 
@@ -43,6 +45,7 @@ class MultiFlagManager {
   ///
   /// * [nonSaveKeys] : If you specify a key that you don't want saved,
   /// that key and its contents will not be converted to a dictionary.
+  @override
   Map<String, dynamic> toDict({List<String>? nonSaveKeys}) {
     Map<String, dynamic> d = {};
     d['class_name'] = className;

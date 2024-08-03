@@ -1,3 +1,5 @@
+import 'package:file_state_manager/file_state_manager.dart';
+
 ///
 /// This package manages multiple indexes identified by name and supports serialization and deserialization.
 ///
@@ -5,10 +7,9 @@
 ///
 /// First edition creation date 2023-05-29 20:56:54
 ///
-class IndexManager {
-  String get className => 'IndexManager';
-
-  String get version => '5';
+class IndexManager extends CloneableFile {
+  static const String className = 'IndexManager';
+  static const String version = '6';
   final Map<String, int?> _map = {};
   static const String _oldSaveKey = 'index_map';
   static const String _saveKey = 'map';
@@ -39,7 +40,8 @@ class IndexManager {
   /// (en)Returns new manager that copied the contents of this manager.
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
-  IndexManager copy() {
+  @override
+  IndexManager clone() {
     return IndexManager.fromDict(toDict());
   }
 
@@ -49,6 +51,7 @@ class IndexManager {
   ///
   /// * [nonSaveKeys] : If you specify a key that you don't want saved,
   /// that key and its contents will not be converted to a dictionary.
+  @override
   Map<String, dynamic> toDict({List<String>? nonSaveKeys}) {
     Map<String, dynamic> d = {};
     d['class_name'] = className;

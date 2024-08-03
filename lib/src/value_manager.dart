@@ -1,3 +1,5 @@
+import 'package:file_state_manager/file_state_manager.dart';
+
 ///
 /// This package manages multiple values identified by name and supports serialization and deserialization.
 ///
@@ -5,10 +7,9 @@
 ///
 /// First edition creation date 2023-06-19 20:39:00
 ///
-class ValueManager {
-  String get className => 'ValueManager';
-
-  String get version => '3';
+class ValueManager extends CloneableFile {
+  static const String className = 'ValueManager';
+  static const String version = '4';
   final Map<String, double?> _map = {};
   static const String _saveKey = 'map';
 
@@ -29,7 +30,8 @@ class ValueManager {
   /// (en)Returns new manager that copied the contents of this manager.
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
-  ValueManager copy() {
+  @override
+  ValueManager clone() {
     return ValueManager.fromDict(toDict());
   }
 
@@ -39,6 +41,7 @@ class ValueManager {
   ///
   /// * [nonSaveKeys] : If you specify a key that you don't want saved,
   /// that key and its contents will not be converted to a dictionary.
+  @override
   Map<String, dynamic> toDict({List<String>? nonSaveKeys}) {
     Map<String, dynamic> d = {};
     d['class_name'] = className;

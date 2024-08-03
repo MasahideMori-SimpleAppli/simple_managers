@@ -1,3 +1,5 @@
+import 'package:file_state_manager/file_state_manager.dart';
+
 ///
 /// This package manages multiple index set identified by name and supports serialization and deserialization.
 ///
@@ -5,10 +7,9 @@
 ///
 /// First edition creation date 2023-06-19 21:06:43
 ///
-class MultiIndexManager {
-  String get className => 'MultiIndexManager';
-
-  String get version => '2';
+class MultiIndexManager extends CloneableFile {
+  static const String className = 'MultiIndexManager';
+  static const String version = '3';
   final Map<String, Set<int>> _map = {};
   static const String _saveKey = 'map';
 
@@ -33,7 +34,8 @@ class MultiIndexManager {
   /// (en)Returns new manager that copied the contents of this manager.
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
-  MultiIndexManager copy() {
+  @override
+  MultiIndexManager clone() {
     return MultiIndexManager.fromDict(toDict());
   }
 
@@ -43,6 +45,7 @@ class MultiIndexManager {
   ///
   /// * [nonSaveKeys] : If you specify a key that you don't want saved,
   /// that key and its contents will not be converted to a dictionary.
+  @override
   Map<String, dynamic> toDict({List<String>? nonSaveKeys}) {
     Map<String, dynamic> d = {};
     d['class_name'] = className;

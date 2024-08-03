@@ -1,3 +1,9 @@
+## 4.0.0
+
+* All manager classes except SingletonStateManager extended [CloneableFile](https://github.com/MasahideMori-SimpleAppli/file_state_manager/blob/main/lib/src/cloneable_file.dart). This makes it possible to undo and redo using the [file_state_manager](https://pub.dev/packages/file_state_manager) package.
+* Due to the above changes, the copy method has been removed. Please use the clone method instead.
+* One thing to note about this change is that the manager does not preserve state regarding text focus. Only serialized information supports Undo and Redo.
+
 ## 3.1.0
 
 * Added SingletonStateManager class.
