@@ -10,7 +10,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class MultiIndexManager extends CloneableFile {
   static const String className = 'MultiIndexManager';
-  static const String version = '3';
+  static const String version = '4';
   final Map<String, Set<int>> _map = {};
   static const String _saveKey = 'map';
 
