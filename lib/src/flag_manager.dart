@@ -9,7 +9,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class FlagManager extends CloneableFile {
   static const String className = 'FlagManager';
-  static const String version = '3';
+  static const String version = '4';
   final Map<String, bool> _map = {};
   static const String _saveKey = 'map';
 
@@ -96,5 +96,28 @@ class FlagManager extends CloneableFile {
   /// 通常はこれを直接呼び出さないでください。
   Map<String, bool> getMap() {
     return _map;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is FlagManager) {
+      if (_map.length != other._map.length) {
+        return false;
+      }
+      for (String key in _map.keys) {
+        if (!other._map.containsKey(key) || _map[key] != other._map[key]) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  int get hashCode {
+    List<Object> objects = [UtilObjectHash.calcMap(_map)];
+    return Object.hashAll(objects);
   }
 }

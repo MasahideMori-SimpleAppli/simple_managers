@@ -9,7 +9,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class IndexManager extends CloneableFile {
   static const String className = 'IndexManager';
-  static const String version = '6';
+  static const String version = '7';
   final Map<String, int?> _map = {};
   static const String _oldSaveKey = 'index_map';
   static const String _saveKey = 'map';
@@ -106,5 +106,28 @@ class IndexManager extends CloneableFile {
   /// 通常はこれを直接呼び出さないでください。
   Map<String, int?> getMap() {
     return _map;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is IndexManager) {
+      if (_map.length != other._map.length) {
+        return false;
+      }
+      for (String key in _map.keys) {
+        if (!other._map.containsKey(key) || _map[key] != other._map[key]) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  int get hashCode {
+    List<Object> objects = [UtilObjectHash.calcMap(_map)];
+    return Object.hashAll(objects);
   }
 }

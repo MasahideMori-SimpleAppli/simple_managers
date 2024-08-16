@@ -1,6 +1,6 @@
 name: simple_managers
 description: A package containing multiple manager classes that support serialization.
-version: 4.0.0
+version: 5.0.0
 repository: https://github.com/MasahideMori-SimpleAppli/simple_managers
 
 environment:
@@ -10,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  file_state_manager: ^1.0.0
+  file_state_manager: ^1.2.0
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

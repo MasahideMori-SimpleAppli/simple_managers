@@ -11,7 +11,7 @@ import '../simple_managers.dart';
 ///
 class StateManager extends CloneableFile {
   static const className = 'StateManager';
-  static const version = '2';
+  static const version = '3';
   static const String _saveKey = "map";
 
   FlagManager fm = FlagManager();
@@ -89,5 +89,28 @@ class StateManager extends CloneableFile {
   /// この呼び出しが影響するのは内部のTextFieldManagerのみです。
   void dispose() {
     tfm.dispose();
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is StateManager) {
+      if (fm != other.fm ||
+          im != other.im ||
+          mfm != other.mfm ||
+          mim != other.mim ||
+          tfm != other.tfm ||
+          vm != other.vm) {
+        return false;
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  int get hashCode {
+    List<Object> objects = [fm, im, mfm, mim, tfm, vm];
+    return Object.hashAll(objects);
   }
 }

@@ -1,3 +1,9 @@
+## 5.0.0
+
+* The equals operator has been overridden in all manager classes except SingletonStateManager.
+* The hashCode getter has been overridden in all manager classes except SingletonStateManager.
+* With the above changes, users can now take advantage of the new automatic diff checking feature in the [file_state_manager](https://pub.dev/packages/file_state_manager) package.
+
 ## 4.0.0
 
 * All manager classes except SingletonStateManager extended [CloneableFile](https://github.com/MasahideMori-SimpleAppli/file_state_manager/blob/main/lib/src/cloneable_file.dart). This makes it possible to undo and redo using the [file_state_manager](https://pub.dev/packages/file_state_manager) package.
