@@ -1,9 +1,9 @@
 export 'src/flag_manager.dart';
 export 'src/index_manager.dart';
-export 'src/selection_manager.dart';
 export 'src/multi_flag_manager.dart';
 export 'src/multi_index_manager.dart';
 export 'src/multi_selection_manager.dart';
+export 'src/selection_manager.dart';
 export 'src/singleton_state_manager.dart';
 export 'src/state_manager.dart';
 export 'src/textfield_manager.dart';
