@@ -1,7 +1,8 @@
 import 'package:file_state_manager/file_state_manager.dart';
 
 ///
-/// This package manages multiple indexes identified by name and supports serialization and deserialization.
+/// This class manages multiple indexes identified by name and
+/// supports serialization and deserialization.
 ///
 /// Author Masahide Mori
 ///
@@ -9,7 +10,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class IndexManager extends CloneableFile {
   static const String className = 'IndexManager';
-  static const String version = '7';
+  static const String version = '8';
   final Map<String, int?> _map = {};
   static const String _oldSaveKey = 'index_map';
   static const String _saveKey = 'map';
@@ -70,12 +71,11 @@ class IndexManager extends CloneableFile {
     return d;
   }
 
-  /// (en)Returns an index with the specified name if it has been generated,
-  /// otherwise it is generated.
+  /// (en)Returns the value corresponding to the given name.
   ///
-  /// (ja)指定名のインデックスが生成済みならばそれを、無ければ生成して返します。
+  /// (ja)指定名に対応する値を返します。
   ///
-  /// * [name] : A unique name assigned to the index.
+  /// * [name] : Target name.
   /// * [initialValue] : Initial value. Applies only when first created.
   /// * [isAlwaysInitialize] : If true, always set initialValue.
   int? getIndex(String name,
@@ -91,10 +91,12 @@ class IndexManager extends CloneableFile {
     }
   }
 
-  /// (en) If an index variable with the specified name has already been created,
-  /// value is assigned to it, otherwise value is assigned to a newly created variable.
+  /// (en) Overwrites the value managed by this class that
+  /// corresponds to the specified name.
+  /// If it does not exist, it will be added.
   ///
-  /// (ja)指定名のインデックス変数が生成済みならばそれに代入し、無ければ新規生成した変数に代入します。
+  /// (ja)このクラスで管理中の、指定の名前に対応する値を上書きします。
+  /// 存在しない場合は管理対象が追加されます。
   void setIndex(String name, int? value) {
     _map[name] = value;
   }

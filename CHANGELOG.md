@@ -1,3 +1,8 @@
+## 6.0.0
+* Added SelectionManager and MultiSelectionManager.
+* Added SelectionManager and MultiSelectionManager support to StateManager.
+* The descriptions of some class have been improved.
+
 ## 5.0.0
 
 * The equals operator has been overridden in all manager classes except SingletonStateManager.

@@ -2,7 +2,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 import 'package:flutter/material.dart';
 
 ///
-/// This package makes it easier to manage the state of textfields.
+/// This class makes it easier to manage the state of textfields.
 ///
 /// Author Masahide Mori
 ///

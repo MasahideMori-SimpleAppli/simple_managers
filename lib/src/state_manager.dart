@@ -3,7 +3,8 @@ import 'package:file_state_manager/file_state_manager.dart';
 import '../simple_managers.dart';
 
 ///
-/// This class is a manager class that includes all the manager classes in this package and is easy to use.
+/// This class is a manager class that includes all the manager classes in
+/// this package and is easy to use.
 ///
 /// Author Masahide Mori
 ///
@@ -11,13 +12,15 @@ import '../simple_managers.dart';
 ///
 class StateManager extends CloneableFile {
   static const className = 'StateManager';
-  static const version = '3';
+  static const version = '4';
   static const String _saveKey = "map";
 
   FlagManager fm = FlagManager();
   IndexManager im = IndexManager();
+  SelectionManager sem = SelectionManager();
   MultiFlagManager mfm = MultiFlagManager();
   MultiIndexManager mim = MultiIndexManager();
+  MultiSelectionManager msem = MultiSelectionManager();
   TextFieldManager tfm = TextFieldManager();
   ValueManager vm = ValueManager();
 
@@ -35,10 +38,15 @@ class StateManager extends CloneableFile {
         fm = FlagManager.fromDict(src[_saveKey]["flag_manager"]);
       } else if (i == "index_manager") {
         im = IndexManager.fromDict(src[_saveKey]["index_manager"]);
+      } else if (i == "selection_manager") {
+        sem = SelectionManager.fromDict(src[_saveKey]["selection_manager"]);
       } else if (i == "multi_flag_manager") {
         mfm = MultiFlagManager.fromDict(src[_saveKey]["multi_flag_manager"]);
       } else if (i == "multi_index_manager") {
         mim = MultiIndexManager.fromDict(src[_saveKey]["multi_index_manager"]);
+      } else if (i == "multi_selection_manager") {
+        msem = MultiSelectionManager.fromDict(
+            src[_saveKey]["multi_selection_manager"]);
       } else if (i == "textfield_manager") {
         tfm = TextFieldManager.fromDict(src[_saveKey]["textfield_manager"]);
       } else if (i == "value_manager") {
@@ -71,8 +79,10 @@ class StateManager extends CloneableFile {
     Map<String, Map<String, dynamic>> mMap = {
       "flag_manager": fm.toDict(nonSaveKeys: nonSaveKeys),
       "index_manager": im.toDict(nonSaveKeys: nonSaveKeys),
+      "selection_manager": sem.toDict(nonSaveKeys: nonSaveKeys),
       "multi_flag_manager": mfm.toDict(nonSaveKeys: nonSaveKeys),
       "multi_index_manager": mim.toDict(nonSaveKeys: nonSaveKeys),
+      "multi_selection_manager": msem.toDict(nonSaveKeys: nonSaveKeys),
       "textfield_manager": tfm.toDict(nonSaveKeys: nonSaveKeys),
       "value_manager": vm.toDict(nonSaveKeys: nonSaveKeys),
     };
@@ -96,8 +106,10 @@ class StateManager extends CloneableFile {
     if (other is StateManager) {
       if (fm != other.fm ||
           im != other.im ||
+          sem != other.sem ||
           mfm != other.mfm ||
           mim != other.mim ||
+          msem != other.msem ||
           tfm != other.tfm ||
           vm != other.vm) {
         return false;
@@ -110,7 +122,7 @@ class StateManager extends CloneableFile {
 
   @override
   int get hashCode {
-    List<Object> objects = [fm, im, mfm, mim, tfm, vm];
+    List<Object> objects = [fm, im, sem, mfm, mim, msem, tfm, vm];
     return Object.hashAll(objects);
   }
 }

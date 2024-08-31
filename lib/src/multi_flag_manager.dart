@@ -2,7 +2,8 @@ import 'package:file_state_manager/file_state_manager.dart';
 import 'package:collection/collection.dart';
 
 ///
-/// This package manages multiple flag lists identified by name and supports serialization and deserialization.
+/// This class manages multiple flag lists identified by name and
+/// supports serialization and deserialization.
 ///
 /// Author Masahide Mori
 ///
@@ -10,7 +11,7 @@ import 'package:collection/collection.dart';
 ///
 class MultiFlagManager extends CloneableFile {
   static const String className = 'MultiFlagManager';
-  static const String version = '4';
+  static const String version = '5';
   final Map<String, List<bool>> _map = {};
   static const String _saveKey = 'map';
 
@@ -65,12 +66,11 @@ class MultiFlagManager extends CloneableFile {
     return d;
   }
 
-  /// (en)Returns an flag with the specified name if it has been generated,
-  /// otherwise it is generated.
+  /// (en)Returns the value corresponding to the given name.
   ///
-  /// (ja)指定名のフラグが生成済みならばそれを、無ければ生成して返します。
+  /// (ja)指定名に対応する値を返します。
   ///
-  /// * [name] : A unique name assigned to the flag.
+  /// * [name] : Target name.
   /// * [initialValues] : Initial value. Applies only when first created.
   /// If null, auto insert empty list.
   /// * [isAlwaysInitialize] : If true, always set initialValue.
@@ -87,10 +87,12 @@ class MultiFlagManager extends CloneableFile {
     }
   }
 
-  /// (en) If an variable with the specified name has already been created,
-  /// value is assigned to it, otherwise value is assigned to a newly created variable.
+  /// (en) Overwrites the value managed by this class that
+  /// corresponds to the specified name.
+  /// If it does not exist, it will be added.
   ///
-  /// (ja)指定名の変数が生成済みならばそれに代入し、無ければ新規生成した変数に代入します。
+  /// (ja)このクラスで管理中の、指定の名前に対応する値を上書きします。
+  /// 存在しない場合は管理対象が追加されます。
   void setFlags(String name, List<bool> values) {
     _map[name] = values;
   }

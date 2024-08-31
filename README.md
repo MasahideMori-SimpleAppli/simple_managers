@@ -5,8 +5,10 @@ A package containing multiple manager classes that support serialization.
 It currently contains the following manager classes
 * FlagManager: Manager of a single flag, such as a switch button.
 * IndexManager: Manager for single index values such as drop-down lists.
+* SelectionManager: Manager for single string values.
 * MultiFlagManager: Manager of a multi flag, such as a checkbox.
 * MultiIndexManager: Manager for multi index set such as segmented button.
+* MultiSelectionManager: Manager for multi string set.
 * TextFieldManager: Text-editing controller and focus manager.
 * ValueManager: Manager of a single floating point number.
 * StateManager: A manager class that has all the manager classes inside it. This is especially useful when using [SpWML](https://pub.dev/packages/simple_block_markup_language).
