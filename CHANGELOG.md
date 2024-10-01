@@ -1,4 +1,9 @@
+## 6.0.1
+
+* Fixed link of SpWML in README.
+
 ## 6.0.0
+
 * Added SelectionManager and MultiSelectionManager.
 * Added SelectionManager and MultiSelectionManager support to StateManager.
 * The descriptions of some class have been improved.

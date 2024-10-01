@@ -11,7 +11,7 @@ It currently contains the following manager classes
 * MultiSelectionManager: Manager for multi string set.
 * TextFieldManager: Text-editing controller and focus manager.
 * ValueManager: Manager of a single floating point number.
-* StateManager: A manager class that has all the manager classes inside it. This is especially useful when using [SpWML](https://pub.dev/packages/simple_block_markup_language).
+* StateManager: A manager class that has all the manager classes inside it. This is especially useful when using [SpWML](https://pub.dev/packages/simple_widget_markup).
 * SingletonStateManager: A singleton class wrapping the StateManager that allows you to easily save and restore the state of your entire app, as long as you don't use duplicate keys anywhere in your app.
 
 ## Usage
