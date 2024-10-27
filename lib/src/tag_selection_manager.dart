@@ -8,21 +8,21 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 /// First edition creation date 2024-08-31 22:14:24
 ///
-class SelectionManager extends CloneableFile {
-  static const String className = 'SelectionManager';
-  static const String version = '1';
+class TagSelectionManager extends CloneableFile {
+  static const String className = 'TagSelectionManager';
+  static const String version = '2';
   final Map<String, String?> _map = {};
   static const String _saveKey = 'map';
 
   /// Constructor
-  SelectionManager();
+  TagSelectionManager();
 
   /// (en)Restore this object from the dictionary.
   /// If data with the same key already exists, it will be overwritten.
   ///
   /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
   /// * [src] : A dictionary made with toDict of this class.
-  SelectionManager.fromDict(Map<String, dynamic> src) {
+  TagSelectionManager.fromDict(Map<String, dynamic> src) {
     for (String i in src[_saveKey].keys) {
       getSelection(i,
           initialValue: src[_saveKey][i] as String?, isAlwaysInitialize: true);
@@ -33,8 +33,8 @@ class SelectionManager extends CloneableFile {
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
   @override
-  SelectionManager clone() {
-    return SelectionManager.fromDict(toDict());
+  TagSelectionManager clone() {
+    return TagSelectionManager.fromDict(toDict());
   }
 
   /// (en)Convert the object to a dictionary.
@@ -103,7 +103,7 @@ class SelectionManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is SelectionManager) {
+    if (other is TagSelectionManager) {
       if (_map.length != other._map.length) {
         return false;
       }

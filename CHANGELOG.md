@@ -1,3 +1,8 @@
+## 7.0.0
+
+* SelectionManager has been renamed to TagSelectionManager.
+* Regarding this change, StateManager will still support reading dictionaries with the old name, but when writing they will be written as tag_selection_manager.
+
 ## 6.0.1
 
 * Fixed link of SpWML in README.
