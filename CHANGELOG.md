@@ -1,3 +1,7 @@
+## 7.0.2
+
+* Fixed a comment in the code, this does not affect the operation.
+
 ## 7.0.1
 
 * Fixed README.

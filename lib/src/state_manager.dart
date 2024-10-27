@@ -57,7 +57,7 @@ class StateManager extends CloneableFile {
       else if (i == "selection_manager") {
         tsm = TagSelectionManager.fromDict(src[_saveKey]["selection_manager"]);
       }
-      // old version (under v7.0.1)
+      // old version (under v7.0.0)
       else if (i == "multi_selection_manager") {
         mtsm = MultiTagSelectionManager.fromDict(
             src[_saveKey]["multi_selection_manager"]);
