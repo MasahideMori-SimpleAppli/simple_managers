@@ -1,6 +1,8 @@
 ## 7.0.1
 
 * Fixed README.
+* MultiSelectionManager has been renamed to MultiTagSelectionManager.
+* This is an oversight fix, and StateManager support is the same as the ver 7.0.0.
 
 ## 7.0.0
 

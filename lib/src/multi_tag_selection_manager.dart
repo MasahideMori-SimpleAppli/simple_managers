@@ -9,21 +9,21 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 /// First edition creation date 2023-08-31 22:34:03
 ///
-class MultiSelectionManager extends CloneableFile {
-  static const String className = 'MultiSelectionManager';
-  static const String version = '1';
+class MultiTagSelectionManager extends CloneableFile {
+  static const String className = 'MultiTagSelectionManager';
+  static const String version = '2';
   final Map<String, Set<String>> _map = {};
   static const String _saveKey = 'map';
 
   /// Constructor
-  MultiSelectionManager();
+  MultiTagSelectionManager();
 
   /// (en)Restore this object from the dictionary.
   /// If data with the same key already exists, it will be overwritten.
   ///
   /// (ja)このクラスのtoDictで変換された辞書から、このクラスに設定されていた内容を復元します。
   /// * [src] : A dictionary made with toDict of this class.
-  MultiSelectionManager.fromDict(Map<String, dynamic> src) {
+  MultiTagSelectionManager.fromDict(Map<String, dynamic> src) {
     for (String i in src[_saveKey].keys) {
       Set<String> values = {};
       for (String j in src[_saveKey][i]) {
@@ -37,8 +37,8 @@ class MultiSelectionManager extends CloneableFile {
   ///
   /// (ja)このマネージャーの内容をコピーした新しいマネージャーを返します。
   @override
-  MultiSelectionManager clone() {
-    return MultiSelectionManager.fromDict(toDict());
+  MultiTagSelectionManager clone() {
+    return MultiTagSelectionManager.fromDict(toDict());
   }
 
   /// (en)Convert the object to a dictionary.
@@ -108,7 +108,7 @@ class MultiSelectionManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is MultiSelectionManager) {
+    if (other is MultiTagSelectionManager) {
       if (_map.length != other._map.length) {
         return false;
       }

@@ -122,7 +122,7 @@ void main() {
   group('MultiSelectionManager test', () {
     test('toDict and fromDict test', () {
       // normal test
-      MultiSelectionManager msem = MultiSelectionManager();
+      MultiTagSelectionManager msem = MultiTagSelectionManager();
       msem.getSelectionSet("first", isAlwaysInitialize: true);
       msem.getSelectionSet("second",
           initialValue: {"2"}, isAlwaysInitialize: true);
@@ -130,14 +130,14 @@ void main() {
       expect(msem.getSelectionSet("first").isEmpty, true);
       expect(msem.getSelectionSet("second").contains("2"), true);
       Map<String, dynamic> m = msem.toDict(nonSaveKeys: ["second"]);
-      msem = MultiSelectionManager.fromDict(m);
+      msem = MultiTagSelectionManager.fromDict(m);
       expect((m["map"] as Map).containsKey("first"), true);
       expect(!(m["map"] as Map).containsKey("second"), true);
       expect(((m["map"] as Map)["first"] as List).isEmpty, true);
       // jsonEncode and jsonDecode
       String t = jsonEncode(msem.toDict());
-      final MultiSelectionManager msemDecoded =
-          MultiSelectionManager.fromDict(jsonDecode(t));
+      final MultiTagSelectionManager msemDecoded =
+          MultiTagSelectionManager.fromDict(jsonDecode(t));
       Map<String, Set<String>> decoded = msemDecoded.getMap();
       expect(decoded["first"]!.isEmpty, true);
       expect(decoded["third"]!.contains("3"), true);
@@ -193,7 +193,7 @@ void main() {
       sm.tsm.setSelection("a", "1");
       sm.mfm.setFlags("a", [true]);
       sm.mim.setIndexSet("a", {1});
-      sm.msem.setSelectionSet("a", {"1"});
+      sm.mtsm.setSelectionSet("a", {"1"});
       sm.tfm.setText("a", "b");
       sm.vm.setValue("a", 1.0);
       Map<String, dynamic> mp = sm.toDict();
@@ -203,7 +203,7 @@ void main() {
       expect(sm.tsm.getSelection("a") == "1", true);
       expect(sm.mfm.getFlags("a").first == true, true);
       expect(sm.mim.getIndexSet("a").first == 1, true);
-      expect(sm.msem.getSelectionSet("a").first == "1", true);
+      expect(sm.mtsm.getSelectionSet("a").first == "1", true);
       expect(sm.tfm.getText("a") == "b", true);
       expect(sm.vm.getValue("a") == 1.0, true);
     });
@@ -218,7 +218,7 @@ void main() {
       sm.tsm.setSelection("a", "1");
       sm.mfm.setFlags("a", [true]);
       sm.mim.setIndexSet("a", {1});
-      sm.msem.setSelectionSet("a", {"1"});
+      sm.mtsm.setSelectionSet("a", {"1"});
       sm.tfm.setText("a", "b");
       sm.vm.setValue("a", 1.0);
       Map<String, dynamic> mp = SingletonStateManager().toDict();
@@ -228,7 +228,7 @@ void main() {
       expect(sm.tsm.getSelection("a") == "1", true);
       expect(sm.mfm.getFlags("a").first == true, true);
       expect(sm.mim.getIndexSet("a").first == 1, true);
-      expect(sm.msem.getSelectionSet("a").first == "1", true);
+      expect(sm.mtsm.getSelectionSet("a").first == "1", true);
       expect(sm.tfm.getText("a") == "b", true);
       expect(sm.vm.getValue("a") == 1.0, true);
     });
@@ -243,7 +243,7 @@ void main() {
       sm.tsm.setSelection("a", "1");
       sm.mfm.setFlags("a", [true]);
       sm.mim.setIndexSet("a", {1});
-      sm.msem.setSelectionSet("a", {"1"});
+      sm.mtsm.setSelectionSet("a", {"1"});
       sm.tfm.setText("a", "b");
       sm.vm.setValue("a", 1.0);
       StateManager sm2 = StateManager();
@@ -252,7 +252,7 @@ void main() {
       sm2.tsm.setSelection("a", "1");
       sm2.mfm.setFlags("a", [true]);
       sm2.mim.setIndexSet("a", {1});
-      sm2.msem.setSelectionSet("a", {"1"});
+      sm2.mtsm.setSelectionSet("a", {"1"});
       sm2.tfm.setText("a", "b");
       sm2.vm.setValue("a", 1.0);
       StateManager sm3 = StateManager();
@@ -261,20 +261,20 @@ void main() {
       sm3.tsm.setSelection("a", "2");
       sm3.mfm.setFlags("a", [false]);
       sm3.mim.setIndexSet("a", {2});
-      sm3.msem.setSelectionSet("a", {"2"});
+      sm3.mtsm.setSelectionSet("a", {"2"});
       sm3.tfm.setText("a", "c");
       sm3.vm.setValue("a", 2.0);
       StateManager sm4 = StateManager();
       sm4.mfm.setFlags("a", [true, false]);
       sm4.mim.setIndexSet("a", {1, 2});
-      sm4.msem.setSelectionSet("a", {"1", "2"});
+      sm4.mtsm.setSelectionSet("a", {"1", "2"});
       StateManager sm5 = StateManager();
       sm5.fm.setFlag("b", true);
       sm5.im.setIndex("b", 1);
       sm5.tsm.setSelection("b", "1");
       sm5.mfm.setFlags("b", [true]);
       sm5.mim.setIndexSet("b", {1});
-      sm5.msem.setSelectionSet("b", {"1"});
+      sm5.mtsm.setSelectionSet("b", {"1"});
       sm5.tfm.setText("b", "b");
       sm5.vm.setValue("b", 1.0);
       expect(sm.fm == sm2.fm, true);
@@ -294,10 +294,10 @@ void main() {
       expect(sm.mim == sm3.mim, false);
       expect(sm.mim == sm4.mim, false);
       expect(sm.mim == sm5.mim, false);
-      expect(sm.msem == sm2.msem, true);
-      expect(sm.msem == sm3.msem, false);
-      expect(sm.msem == sm4.msem, false);
-      expect(sm.msem == sm5.msem, false);
+      expect(sm.mtsm == sm2.mtsm, true);
+      expect(sm.mtsm == sm3.mtsm, false);
+      expect(sm.mtsm == sm4.mtsm, false);
+      expect(sm.mtsm == sm5.mtsm, false);
       expect(sm.tfm == sm2.tfm, true);
       expect(sm.tfm == sm3.tfm, false);
       expect(sm.tfm == sm5.tfm, false);
@@ -314,7 +314,7 @@ void main() {
       sm.tsm.setSelection("a", "1");
       sm.mfm.setFlags("a", [true]);
       sm.mim.setIndexSet("a", {1});
-      sm.msem.setSelectionSet("a", {"1"});
+      sm.mtsm.setSelectionSet("a", {"1"});
       sm.tfm.setText("a", "b");
       sm.vm.setValue("a", 1.0);
       StateManager sm2 = StateManager();
@@ -323,7 +323,7 @@ void main() {
       sm2.tsm.setSelection("a", "1");
       sm2.mfm.setFlags("a", [true]);
       sm2.mim.setIndexSet("a", {1});
-      sm2.msem.setSelectionSet("a", {"1"});
+      sm2.mtsm.setSelectionSet("a", {"1"});
       sm2.tfm.setText("a", "b");
       sm2.vm.setValue("a", 1.0);
       StateManager sm3 = StateManager();
@@ -332,20 +332,20 @@ void main() {
       sm3.tsm.setSelection("a", "2");
       sm3.mfm.setFlags("a", [false]);
       sm3.mim.setIndexSet("a", {2});
-      sm3.msem.setSelectionSet("a", {"2"});
+      sm3.mtsm.setSelectionSet("a", {"2"});
       sm3.tfm.setText("a", "c");
       sm3.vm.setValue("a", 2.0);
       StateManager sm4 = StateManager();
       sm4.mfm.setFlags("a", [true, false]);
       sm4.mim.setIndexSet("a", {1, 2});
-      sm4.msem.setSelectionSet("a", {"1", "2"});
+      sm4.mtsm.setSelectionSet("a", {"1", "2"});
       StateManager sm5 = StateManager();
       sm5.fm.setFlag("b", true);
       sm5.im.setIndex("b", 1);
       sm5.tsm.setSelection("b", "1");
       sm5.mfm.setFlags("b", [true]);
       sm5.mim.setIndexSet("b", {1});
-      sm5.msem.setSelectionSet("b", {"1"});
+      sm5.mtsm.setSelectionSet("b", {"1"});
       sm5.tfm.setText("b", "b");
       sm5.vm.setValue("b", 1.0);
       expect(sm.fm.hashCode == sm2.fm.hashCode, true);
@@ -365,10 +365,10 @@ void main() {
       expect(sm.mim.hashCode == sm3.mim.hashCode, false);
       expect(sm.mim.hashCode == sm4.mim.hashCode, false);
       expect(sm.mim.hashCode == sm5.mim.hashCode, false);
-      expect(sm.msem.hashCode == sm2.msem.hashCode, true);
-      expect(sm.msem.hashCode == sm3.msem.hashCode, false);
-      expect(sm.msem.hashCode == sm4.msem.hashCode, false);
-      expect(sm.msem.hashCode == sm5.msem.hashCode, false);
+      expect(sm.mtsm.hashCode == sm2.mtsm.hashCode, true);
+      expect(sm.mtsm.hashCode == sm3.mtsm.hashCode, false);
+      expect(sm.mtsm.hashCode == sm4.mtsm.hashCode, false);
+      expect(sm.mtsm.hashCode == sm5.mtsm.hashCode, false);
       expect(sm.tfm.hashCode == sm2.tfm.hashCode, true);
       expect(sm.tfm.hashCode == sm3.tfm.hashCode, false);
       expect(sm.tfm.hashCode == sm5.tfm.hashCode, false);
