@@ -5,7 +5,7 @@ A package containing multiple manager classes that support serialization.
 It currently contains the following manager classes
 * FlagManager: Manager of a single flag, such as a switch button.
 * IndexManager: Manager for single index values such as drop-down lists.
-* SelectionManager: Manager for single string values.
+* TagSelectionManager: Manager for single string tag values.
 * MultiFlagManager: Manager of a multi flag, such as a checkbox.
 * MultiIndexManager: Manager for multi index set such as segmented button.
 * MultiSelectionManager: Manager for multi string set.

@@ -1,3 +1,7 @@
+## 7.0.1
+
+* Fixed README.
+
 ## 7.0.0
 
 * SelectionManager has been renamed to TagSelectionManager.
