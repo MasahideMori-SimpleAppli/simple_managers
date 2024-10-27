@@ -8,7 +8,7 @@ It currently contains the following manager classes
 * TagSelectionManager: Manager for single string tag values.
 * MultiFlagManager: Manager of a multi flag, such as a checkbox.
 * MultiIndexManager: Manager for multi index set such as segmented button.
-* MultiSelectionManager: Manager for multi string set.
+* MultiTagSelectionManager: Manager for multi string tag set.
 * TextFieldManager: Text-editing controller and focus manager.
 * ValueManager: Manager of a single floating point number.
 * StateManager: A manager class that has all the manager classes inside it. This is especially useful when using [SpWML](https://pub.dev/packages/simple_widget_markup).

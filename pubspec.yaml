@@ -1,6 +1,6 @@
 name: simple_managers
 description: A package containing multiple manager classes that support serialization.
-version: 7.0.2
+version: 7.0.3
 repository: https://github.com/MasahideMori-SimpleAppli/simple_managers
 
 environment:
