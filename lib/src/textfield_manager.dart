@@ -209,7 +209,21 @@ class TextFieldManager extends CloneableFile {
 
   @override
   int get hashCode {
-    List<Object> objects = [UtilObjectHash.calcMappedTEC(_ctrlMap)];
+    List<Object> objects = [_calcMappedTEC(_ctrlMap)];
     return Object.hashAll(objects);
+  }
+
+  /// (en) Calculate hash code for mapped TextEditingController by
+  /// it's include text.
+  ///
+  /// (ja) マップされたTextEditingControllerのハッシュコードを、
+  /// 含まれるテキストによって計算します。
+  static int _calcMappedTEC(Map<String, TextEditingController> m) {
+    int r = 17;
+    m.forEach((String key, TextEditingController value) {
+      r = 37 * r + key.hashCode;
+      r = 37 * r + value.text.hashCode;
+    });
+    return r;
   }
 }

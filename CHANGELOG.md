@@ -1,3 +1,7 @@
+## 7.0.4
+
+* Updates associated with dependencies library updates.
+
 ## 7.0.3
 
 * Fixed README.
