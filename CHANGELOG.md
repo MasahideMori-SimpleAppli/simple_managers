@@ -1,3 +1,8 @@
+## 7.0.5
+
+* Minor internal refactoring without API changes.
+* Update internal dependencies (no functional changes).
+
 ## 7.0.4
 
 * Updates associated with dependencies library updates.

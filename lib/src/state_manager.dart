@@ -1,6 +1,6 @@
 import 'package:file_state_manager/file_state_manager.dart';
 
-import '../simple_managers.dart';
+import 'package:simple_managers/simple_managers.dart';
 
 ///
 /// This class is a manager class that includes all the manager classes in
