@@ -12,7 +12,7 @@ import 'package:simple_managers/simple_managers.dart';
 ///
 class StateManager extends CloneableFile {
   static const className = 'StateManager';
-  static const version = '6';
+  static const version = '7';
   static const String _saveKey = "map";
 
   FlagManager fm = FlagManager();
@@ -113,21 +113,21 @@ class StateManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is StateManager) {
-      if (fm != other.fm ||
-          im != other.im ||
-          tsm != other.tsm ||
-          mfm != other.mfm ||
-          mim != other.mim ||
-          mtsm != other.mtsm ||
-          tfm != other.tfm ||
-          vm != other.vm) {
-        return false;
-      }
-      return true;
-    } else {
+    // 1. 同一参照なら即座に終了
+    if (identical(this, other)) return true;
+    // 2. 基本的な型チェック
+    if (other is! StateManager) return false;
+    if (fm != other.fm ||
+        im != other.im ||
+        tsm != other.tsm ||
+        mfm != other.mfm ||
+        mim != other.mim ||
+        mtsm != other.mtsm ||
+        tfm != other.tfm ||
+        vm != other.vm) {
       return false;
     }
+    return true;
   }
 
   @override

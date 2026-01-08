@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 ///
 class TextFieldManager extends CloneableFile {
   static const String className = 'TextFieldManager';
-  static const String version = '8';
+  static const String version = '9';
   final Map<String, TextEditingController> _ctrlMap = {};
   final Map<String, FocusNode> _focusMap = {};
   static const String _oldSaveKey = 'text_map';
@@ -191,20 +191,20 @@ class TextFieldManager extends CloneableFile {
   /// (ja) TextEditingControllers のみが比較対象になります。
   @override
   bool operator ==(Object other) {
-    if (other is TextFieldManager) {
-      if (_ctrlMap.length != other._ctrlMap.length) {
-        return false;
-      }
-      for (String key in _ctrlMap.keys) {
-        if (!other._ctrlMap.containsKey(key) ||
-            _ctrlMap[key]!.text != other._ctrlMap[key]!.text) {
-          return false;
-        }
-      }
-      return true;
-    } else {
+    // 1. 同一参照なら即座に終了
+    if (identical(this, other)) return true;
+    // 2. 基本的な型チェック
+    if (other is! TextFieldManager) return false;
+    if (_ctrlMap.length != other._ctrlMap.length) {
       return false;
     }
+    for (String key in _ctrlMap.keys) {
+      if (!other._ctrlMap.containsKey(key) ||
+          _ctrlMap[key]!.text != other._ctrlMap[key]!.text) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override

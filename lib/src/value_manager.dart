@@ -10,7 +10,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class ValueManager extends CloneableFile {
   static const String className = 'ValueManager';
-  static const String version = '6';
+  static const String version = '7';
   final Map<String, double?> _map = {};
   static const String _saveKey = 'map';
 
@@ -102,19 +102,19 @@ class ValueManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is ValueManager) {
-      if (_map.length != other._map.length) {
-        return false;
-      }
-      for (String key in _map.keys) {
-        if (!other._map.containsKey(key) || _map[key] != other._map[key]) {
-          return false;
-        }
-      }
-      return true;
-    } else {
+    // 1. 同一参照なら即座に終了
+    if (identical(this, other)) return true;
+    // 2. 基本的な型チェック
+    if (other is! ValueManager) return false;
+    if (_map.length != other._map.length) {
       return false;
     }
+    for (String key in _map.keys) {
+      if (!other._map.containsKey(key) || _map[key] != other._map[key]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override

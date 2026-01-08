@@ -11,7 +11,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class MultiTagSelectionManager extends CloneableFile {
   static const String className = 'MultiTagSelectionManager';
-  static const String version = '2';
+  static const String version = '3';
   final Map<String, Set<String>> _map = {};
   static const String _saveKey = 'map';
 
@@ -108,20 +108,20 @@ class MultiTagSelectionManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is MultiTagSelectionManager) {
-      if (_map.length != other._map.length) {
-        return false;
-      }
-      for (String key in _map.keys) {
-        if (!other._map.containsKey(key) ||
-            !const SetEquality().equals(_map[key], other._map[key])) {
-          return false;
-        }
-      }
-      return true;
-    } else {
+    // 1. 同一参照なら即座に終了
+    if (identical(this, other)) return true;
+    // 2. 基本的な型チェック
+    if (other is! MultiTagSelectionManager) return false;
+    if (_map.length != other._map.length) {
       return false;
     }
+    for (String key in _map.keys) {
+      if (!other._map.containsKey(key) ||
+          !const SetEquality().equals(_map[key], other._map[key])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override

@@ -11,7 +11,7 @@ import 'package:collection/collection.dart';
 ///
 class MultiFlagManager extends CloneableFile {
   static const String className = 'MultiFlagManager';
-  static const String version = '5';
+  static const String version = '6';
   final Map<String, List<bool>> _map = {};
   static const String _saveKey = 'map';
 
@@ -108,20 +108,20 @@ class MultiFlagManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is MultiFlagManager) {
-      if (_map.length != other._map.length) {
-        return false;
-      }
-      for (String key in _map.keys) {
-        if (!other._map.containsKey(key) ||
-            !const ListEquality().equals(_map[key], other._map[key])) {
-          return false;
-        }
-      }
-      return true;
-    } else {
+    // 1. 同一参照なら即座に終了
+    if (identical(this, other)) return true;
+    // 2. 基本的な型チェック
+    if (other is! MultiFlagManager) return false;
+    if (_map.length != other._map.length) {
       return false;
     }
+    for (String key in _map.keys) {
+      if (!other._map.containsKey(key) ||
+          !const ListEquality().equals(_map[key], other._map[key])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override

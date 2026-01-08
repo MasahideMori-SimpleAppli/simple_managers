@@ -1,3 +1,7 @@
+## 7.0.6
+
+* A check for identical references has been added to the comparison calculations for each manager class, which allows for faster comparisons under certain conditions.
+
 ## 7.0.5
 
 * Minor internal refactoring without API changes.

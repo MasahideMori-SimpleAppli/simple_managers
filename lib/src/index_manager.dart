@@ -10,7 +10,7 @@ import 'package:file_state_manager/file_state_manager.dart';
 ///
 class IndexManager extends CloneableFile {
   static const String className = 'IndexManager';
-  static const String version = '8';
+  static const String version = '9';
   final Map<String, int?> _map = {};
   static const String _oldSaveKey = 'index_map';
   static const String _saveKey = 'map';
@@ -112,19 +112,19 @@ class IndexManager extends CloneableFile {
 
   @override
   bool operator ==(Object other) {
-    if (other is IndexManager) {
-      if (_map.length != other._map.length) {
-        return false;
-      }
-      for (String key in _map.keys) {
-        if (!other._map.containsKey(key) || _map[key] != other._map[key]) {
-          return false;
-        }
-      }
-      return true;
-    } else {
+    // 1. 同一参照なら即座に終了
+    if (identical(this, other)) return true;
+    // 2. 基本的な型チェック
+    if (other is! IndexManager) return false;
+    if (_map.length != other._map.length) {
       return false;
     }
+    for (String key in _map.keys) {
+      if (!other._map.containsKey(key) || _map[key] != other._map[key]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override
